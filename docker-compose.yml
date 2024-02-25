@@ -1,0 +1,17 @@
+services:
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - '5432'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_DB=postgresTwo'
+      - 'POSTGRES_PASSWORD=10051996Al'
+  my-app:
+    image: amazoncorretto:17.0.2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database

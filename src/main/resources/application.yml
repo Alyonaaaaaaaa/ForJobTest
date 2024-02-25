@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgresTwo
+    username: postgres
+    password: 10051996Al
+  docker:
+    compose:
+      file: ./docker-compose.yml
+      enabled: true
+      lifecycle-management: start_and_stop
