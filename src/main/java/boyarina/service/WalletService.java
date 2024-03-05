@@ -7,6 +7,7 @@ import boyarina.repository.WalletRepository;
 import boyarina.service.converter.WalletToResponseConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -26,11 +27,12 @@ public class WalletService {
         return balance;
     }
 
+    @Transactional(readOnly = false)
     public WalletResponse update(UUID walletId, OperationType operationType, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(walletId)
                 .orElseThrow(() -> new NotFoundException("Wallet with this ID was not found"));
 
-        BigDecimal sum = walletRepository.findBalanceById(walletId);
+        BigDecimal sum = wallet.getBalance();
 
         if ((operationType.compareTo(OperationType.WITHDRAW) == 0) &&
                 ((sum.compareTo(BigDecimal.ZERO) == 0) || (sum.compareTo(amount) < 0))) {
@@ -43,6 +45,7 @@ public class WalletService {
         }
         wallet.setBalance(sum);
         wallet = walletRepository.save(wallet);
-        return converter.convert(wallet);
+
+        return converter.convert(new Wallet());
     }
 }
