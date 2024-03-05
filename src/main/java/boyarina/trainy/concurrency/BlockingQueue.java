@@ -16,18 +16,18 @@ public class BlockingQueue<T> {
             wait();
         }
         if (this.queue.size() == 0) {
+            this.queue.add(item);
             notifyAll();
         }
-        this.queue.add(item);
     }
 
-    public T dequeue() throws InterruptedException {
+    public void dequeue() throws InterruptedException {
         while (this.queue.size() == 0) {
             wait();
         }
         if (this.queue.size() == this.limit) {
+            this.queue.remove();
             notifyAll();
         }
-        return this.queue.remove();
     }
 }
