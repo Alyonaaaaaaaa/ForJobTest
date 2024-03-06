@@ -2,12 +2,13 @@ package boyarina.trainy.concurrency;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ConcurrentBankExample {
     public static void main(String[] args) {
@@ -46,10 +47,20 @@ public class ConcurrentBankExample {
             return bankAccount;
         }
 
-        @Transactional
         public void transfer(BankAccount account1, BankAccount account2, int amount) {
-            account1.setBalance(account1.withdraw(amount));
-            account2.setBalance(account2.deposit(amount));
+            Lock lock = new ReentrantLock();
+            lock.lock();
+            try {
+                if (Integer.parseInt(account1.getBalance().toString()) < amount) {
+                    throw new IllegalArgumentException("insufficient funds");
+                }
+                account1.setBalance(account1.withdraw(amount));
+                account2.setBalance(account2.deposit(amount));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                lock.unlock();
+            }
         }
 
         public int getTotalBalance() {
