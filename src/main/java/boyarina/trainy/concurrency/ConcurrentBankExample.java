@@ -73,15 +73,23 @@ public class ConcurrentBankExample {
         }
 
         public void withdraw(BankAccount account, int amount) {
+            lock.lock();
             try {
                 account.withdraw(amount);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+            } finally {
+                lock.unlock();
             }
         }
 
         public void deposit(BankAccount account, int amount) {
-            account.deposit(amount);
+            lock.lock();
+            try {
+                account.deposit(amount);
+            } finally {
+                lock.unlock();
+            }
         }
 
         public int getTotalBalance() {
@@ -104,16 +112,12 @@ public class ConcurrentBankExample {
             return new AtomicInteger(balance.addAndGet(amount));
         }
 
-        public AtomicInteger withdraw(int amount) throws IllegalArgumentException{
-            lock.lock();
-            try {
-                if (Integer.parseInt(balance.toString()) >= amount) {
-                    return new AtomicInteger(balance.addAndGet(-amount));
-                }
-            } finally {
-                lock.unlock();
+        public AtomicInteger withdraw(int amount) throws IllegalArgumentException {
+            if (Integer.parseInt(balance.toString()) >= amount) {
+                return new AtomicInteger(balance.addAndGet(-amount));
+            } else {
+                throw new IllegalArgumentException("insufficient funds");
             }
-            throw new IllegalArgumentException("insufficient funds");
         }
 
         public AtomicInteger getBalance() {
