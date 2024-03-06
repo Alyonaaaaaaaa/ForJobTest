@@ -39,7 +39,8 @@ public class ConcurrentBankExample {
     }
 
     public static class ConcurrentBank {
-        public List<BankAccount> accountList = new ArrayList<>();
+        private final List<BankAccount> accountList = new ArrayList<>();
+        private final Lock lock = new ReentrantLock();
 
         public BankAccount createAccount(int amount) {
             BankAccount bankAccount = new BankAccount(UUID.randomUUID(), new AtomicInteger(amount));
@@ -48,7 +49,6 @@ public class ConcurrentBankExample {
         }
 
         public void transfer(BankAccount account1, BankAccount account2, int amount) {
-            Lock lock = new ReentrantLock();
             lock.lock();
             try {
                 if (Integer.parseInt(account1.getBalance().toString()) < amount) {
