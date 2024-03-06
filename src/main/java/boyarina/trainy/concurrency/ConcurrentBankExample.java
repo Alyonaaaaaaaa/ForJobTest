@@ -15,19 +15,31 @@ public class ConcurrentBankExample {
         ConcurrentBank bank = new ConcurrentBank();
 
         // Создание счетов
-        BankAccount account1 = bank.createAccount(1000);
+        BankAccount account1 = bank.createAccount(0);
         BankAccount account2 = bank.createAccount(500);
 
         // Перевод между счетами
         Thread transferThread1 = new Thread(() -> bank.transfer(account1, account2, 200));
         Thread transferThread2 = new Thread(() -> bank.transfer(account2, account1, 100));
+        Thread transferThread3 = new Thread(() -> bank.withdraw(account1, 100));
+        Thread transferThread4 = new Thread(() -> bank.withdraw(account2, 100));
+        Thread transferThread5 = new Thread(() -> bank.deposit(account1, 200));
+        Thread transferThread6 = new Thread(() -> bank.deposit(account2, 200));
 
         transferThread1.start();
         transferThread2.start();
+        transferThread3.start();
+        transferThread4.start();
+        transferThread5.start();
+        transferThread6.start();
 
         try {
             transferThread1.join();
             transferThread2.join();
+            transferThread3.join();
+            transferThread4.join();
+            transferThread5.join();
+            transferThread6.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -51,9 +63,6 @@ public class ConcurrentBankExample {
         public void transfer(BankAccount account1, BankAccount account2, int amount) {
             lock.lock();
             try {
-                if (Integer.parseInt(account1.getBalance().toString()) < amount) {
-                    throw new IllegalArgumentException("insufficient funds");
-                }
                 account1.setBalance(account1.withdraw(amount));
                 account2.setBalance(account2.deposit(amount));
             } catch (Exception e) {
@@ -61,6 +70,18 @@ public class ConcurrentBankExample {
             } finally {
                 lock.unlock();
             }
+        }
+
+        public void withdraw(BankAccount account, int amount) {
+            try {
+                account.withdraw(amount);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        public void deposit(BankAccount account, int amount) {
+            account.deposit(amount);
         }
 
         public int getTotalBalance() {
@@ -75,7 +96,7 @@ public class ConcurrentBankExample {
     @AllArgsConstructor
     @Data
     public static class BankAccount {
-
+        private final Lock lock = new ReentrantLock();
         public UUID uuid;
         public AtomicInteger balance;
 
@@ -83,8 +104,16 @@ public class ConcurrentBankExample {
             return new AtomicInteger(balance.addAndGet(amount));
         }
 
-        public AtomicInteger withdraw(int amount) {
-            return new AtomicInteger(balance.addAndGet(-amount));
+        public AtomicInteger withdraw(int amount) throws IllegalArgumentException{
+            lock.lock();
+            try {
+                if (Integer.parseInt(balance.toString()) >= amount) {
+                    return new AtomicInteger(balance.addAndGet(-amount));
+                }
+            } finally {
+                lock.unlock();
+            }
+            throw new IllegalArgumentException("insufficient funds");
         }
 
         public AtomicInteger getBalance() {
