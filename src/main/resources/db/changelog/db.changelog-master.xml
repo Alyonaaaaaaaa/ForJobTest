@@ -4,14 +4,156 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="wallet" author="boyarina">
-        <createTable tableName="wallet">
+<!--    <changeSet id="wallet" author="boyarina">-->
+<!--        <createTable tableName="wallet">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="balance" type="money">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="user" author="boyarina">-->
+<!--        <createTable tableName="user">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="email" type="varchar(255)">-->
+<!--                <constraints unique="true" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="order" author="boyarina">-->
+<!--        <createTable tableName="order">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="product" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="price" type="money">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="status" type="varchar(255)">-->
+<!--                <constraints unique="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="user_id" type="uuid">-->
+<!--                <constraints unique="false" nullable="false" foreignKeyName="order_user_id" references="user(id)"-->
+<!--                             deleteCascade="true"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="author" author="boyarina">-->
+<!--        <createTable tableName="author">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="book" author="boyarina">-->
+<!--        <createTable tableName="book">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="title" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="author_id" type="uuid">-->
+<!--                <constraints unique="false" nullable="false" foreignKeyName="book_author_id" references="author(id)"-->
+<!--                             deleteCascade="true"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="customer" author="boyarina">-->
+<!--        <createTable tableName="customer">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="firstName" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="lastName" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="email" type="varchar(255)">-->
+<!--                <constraints unique="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="contactNumber" type="varchar(255)">-->
+<!--                <constraints unique="true" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="product" author="boyarina">-->
+<!--        <createTable tableName="product">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="description" type="varchar(255)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="price" type="money">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="quantityInStock" type="number">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="invoice" author="boyarina">-->
+<!--        <createTable tableName="invoice">-->
+<!--            <column name="id" type="uuid">-->
+<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="customer_id" type="uuid">-->
+<!--                <constraints unique="false" nullable="false" foreignKeyName="invoice_customer_id" references="customer(id)"-->
+<!--                             deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="invoiceDate" type="date">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="shippingAddress" type="varchar(225)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="totalPrice" type="number">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="invoiceStatus" type="varchar(225)">-->
+<!--                <constraints unique="false" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+    <changeSet id="product_for_invoice" author="boyarina">
+        <createTable tableName="product_for_invoice">
             <column name="id" type="uuid">
                 <constraints unique="true" nullable="false" primaryKey="true"/>
             </column>
-            <column name="balance" type="money">
-                <constraints unique="false" nullable="false"/>
+            <column name="product_id" type="uuid">
+                <constraints unique="false" nullable="true" foreignKeyName="product_for_invoice_product_id"
+                             references="product(id)" deleteCascade="true"/>
+            </column>
+            <column name="invoice_id" type="uuid">
+                <constraints unique="false" nullable="true" foreignKeyName="product_for_invoice_id"
+                             references="invoice(id)" deleteCascade="true"/>
             </column>
         </createTable>
     </changeSet>
+
 </databaseChangeLog>

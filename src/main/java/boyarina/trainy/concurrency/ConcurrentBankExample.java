@@ -52,7 +52,6 @@ public class ConcurrentBankExample {
 
     public static class ConcurrentBank {
         private final List<BankAccount> accountList = new ArrayList<>();
-        private final Lock lock = new ReentrantLock();
 
         public BankAccount createAccount(int amount) {
             BankAccount bankAccount = new BankAccount(UUID.randomUUID(), new AtomicInteger(amount));
@@ -61,35 +60,24 @@ public class ConcurrentBankExample {
         }
 
         public void transfer(BankAccount account1, BankAccount account2, int amount) {
-            lock.lock();
             try {
                 account1.setBalance(account1.withdraw(amount));
                 account2.setBalance(account2.deposit(amount));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-            } finally {
-                lock.unlock();
             }
         }
 
         public void withdraw(BankAccount account, int amount) {
-            lock.lock();
             try {
                 account.withdraw(amount);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-            } finally {
-                lock.unlock();
             }
         }
 
         public void deposit(BankAccount account, int amount) {
-            lock.lock();
-            try {
-                account.deposit(amount);
-            } finally {
-                lock.unlock();
-            }
+            account.deposit(amount);
         }
 
         public int getTotalBalance() {
@@ -113,10 +101,15 @@ public class ConcurrentBankExample {
         }
 
         public AtomicInteger withdraw(int amount) throws IllegalArgumentException {
-            if (Integer.parseInt(balance.toString()) >= amount) {
-                return new AtomicInteger(balance.addAndGet(-amount));
-            } else {
-                throw new IllegalArgumentException("insufficient funds");
+            lock.lock();
+            try {
+                if (Integer.parseInt(balance.toString()) >= amount) {
+                    return new AtomicInteger(balance.addAndGet(-amount));
+                } else {
+                    throw new IllegalArgumentException("insufficient funds");
+                }
+            } finally {
+                lock.unlock();
             }
         }
 

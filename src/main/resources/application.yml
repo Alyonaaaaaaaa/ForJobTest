@@ -7,6 +7,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgresTwo
     username: postgres
     password: 10051996Al
+
+
 #  docker:
 #    compose:
 #      file: ./docker-compose.yml
