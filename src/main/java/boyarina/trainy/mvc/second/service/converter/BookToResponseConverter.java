@@ -1,6 +1,6 @@
 package boyarina.trainy.mvc.second.service.converter;
 
-import boyarina.trainy.mvc.second.api.json.BookResponse;
+import boyarina.trainy.mvc.second.api.dto.BookResponse;
 import boyarina.trainy.mvc.second.entity.Book;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

@@ -1,10 +1,10 @@
 package boyarina.trainy.mvc.thrid.service;
 
 import boyarina.exception.NotFoundException;
-import boyarina.trainy.mvc.thrid.api.json.ProductResponse;
 import boyarina.trainy.mvc.thrid.entity.Product;
 import boyarina.trainy.mvc.thrid.repository.ProductRepository;
-import boyarina.trainy.mvc.thrid.service.converter.ProductToResponseConverter;
+import boyarina.trainy.mvc.thrid.service.converter.ProductToJsonConverter;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,19 +13,20 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
     private ProductRepository productRepository;
-    private ProductToResponseConverter converter;
+    private ProductToJsonConverter converter;
 
-    public List<ProductResponse> findAll() {
+    public List<String> findAll() {
         return productRepository.findAll().stream().map(converter::convert).collect(Collectors.toList());
     }
 
-    public ProductResponse findById(UUID id) {
+    public String findById(UUID id) {
         return converter.convert(this.getProduct(id));
     }
 
-    public ProductResponse create(String name, String description, BigDecimal price, Long quantityInStock) {
+    public String create(String name, String description, BigDecimal price, Long quantityInStock) {
         Product product = productRepository.save(new Product()
                 .setName(name)
                 .setDescription(description)

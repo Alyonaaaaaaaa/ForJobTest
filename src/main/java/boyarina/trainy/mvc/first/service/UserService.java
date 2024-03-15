@@ -1,8 +1,8 @@
 package boyarina.trainy.mvc.first.service;
 
 import boyarina.exception.NotFoundException;
-import boyarina.trainy.mvc.first.api.json.ReportResponse;
-import boyarina.trainy.mvc.first.api.json.UserResponse;
+import boyarina.trainy.mvc.first.api.dto.ReportResponse;
+import boyarina.trainy.mvc.first.api.dto.UserResponse;
 import boyarina.trainy.mvc.first.entity.User;
 import boyarina.trainy.mvc.first.model.ReportModel;
 import boyarina.trainy.mvc.first.repository.OrderRepository;

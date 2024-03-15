@@ -7,7 +7,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgresTwo
     username: postgres
     password: 10051996Al
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8080
 
+jwt:
+  secret: afe7738d20228729185cd3d4092a7ec1b4fedb56
+  lifetime: 30m
 
 #  docker:
 #    compose:

@@ -1,7 +1,7 @@
 package boyarina.trainy.mvc.second.service;
 
 import boyarina.exception.NotFoundException;
-import boyarina.trainy.mvc.second.api.json.BookResponse;
+import boyarina.trainy.mvc.second.api.dto.BookResponse;
 import boyarina.trainy.mvc.second.entity.Author;
 import boyarina.trainy.mvc.second.entity.Book;
 import boyarina.trainy.mvc.second.exception.DuplicateValueException;
@@ -11,6 +11,7 @@ import boyarina.trainy.mvc.second.service.converter.AuthorToResponseConverter;
 import boyarina.trainy.mvc.second.service.converter.BookToResponseConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,8 @@ public class BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
-    public List<BookResponse> getAllBooks(PageRequest pageRequest) {
-        return bookRepository.findAll(pageRequest)
+    public List<BookResponse> getAllBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable)
                 .stream()
                 .map(bookConverter::convert)
                 .collect(Collectors.toList());
