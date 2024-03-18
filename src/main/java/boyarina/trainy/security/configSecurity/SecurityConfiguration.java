@@ -50,7 +50,6 @@ public class SecurityConfiguration {
                     JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
                     jwtAuthenticationConverter.setPrincipalClaimName("preferred_username");
                     jwt.jwtAuthenticationConverter(jwtAuthenticationConverter);
-
                     JwtGrantedAuthoritiesConverter customJwtGrantedAuthConverter = new JwtGrantedAuthoritiesConverter();
                     customJwtGrantedAuthConverter.setAuthoritiesClaimName("groups");
                     customJwtGrantedAuthConverter.setAuthorityPrefix("");

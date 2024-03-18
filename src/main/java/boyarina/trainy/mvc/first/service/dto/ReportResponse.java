@@ -1,4 +1,4 @@
-package boyarina.trainy.mvc.first.api.dto;
+package boyarina.trainy.mvc.first.service.dto;
 
 import boyarina.trainy.mvc.first.entity.Order;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package boyarina.trainy.mvc.second.service.converter;
 
-import boyarina.trainy.mvc.second.api.dto.AuthorResponse;
+import boyarina.trainy.mvc.second.service.dto.AuthorResponse;
 import boyarina.trainy.mvc.second.entity.Author;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

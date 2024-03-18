@@ -1,9 +1,9 @@
 package boyarina.trainy.mvc.first.api.controller;
 
 import boyarina.trainy.AbstractController;
-import boyarina.trainy.mvc.first.api.dto.ReportResponse;
-import boyarina.trainy.mvc.first.api.dto.UserRequest;
-import boyarina.trainy.mvc.first.api.dto.UserResponse;
+import boyarina.trainy.mvc.first.service.dto.ReportResponse;
+import boyarina.trainy.mvc.first.service.dto.UserRequest;
+import boyarina.trainy.mvc.first.service.dto.UserResponse;
 import boyarina.trainy.mvc.first.service.UserService;
 import boyarina.trainy.mvc.first.views.Views;
 import com.fasterxml.jackson.annotation.JsonView;

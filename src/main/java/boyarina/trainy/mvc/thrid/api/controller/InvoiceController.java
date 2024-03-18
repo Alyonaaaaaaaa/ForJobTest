@@ -1,7 +1,7 @@
 package boyarina.trainy.mvc.thrid.api.controller;
 
 
-import boyarina.trainy.mvc.thrid.api.dto.InvoiceRequest;
+import boyarina.trainy.mvc.thrid.service.dto.InvoiceRequest;
 import boyarina.trainy.mvc.thrid.service.InvoiceService;
 import boyarina.trainy.mvc.thrid.service.converter.JsonToInvoiceConverter;
 import lombok.AllArgsConstructor;

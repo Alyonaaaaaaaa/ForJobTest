@@ -1,4 +1,4 @@
-package boyarina.trainy.mvc.thrid.api.dto;
+package boyarina.trainy.mvc.thrid.service.dto;
 
 
 import boyarina.trainy.mvc.thrid.entity.Product;

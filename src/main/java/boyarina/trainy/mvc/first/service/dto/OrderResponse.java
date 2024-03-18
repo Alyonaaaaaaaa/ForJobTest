@@ -1,12 +1,14 @@
-package boyarina.trainy.mvc.first.api.dto;
+package boyarina.trainy.mvc.first.service.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
-public class OrderRequest {
+@AllArgsConstructor
+public class OrderResponse {
     private UUID id;
     private String product;
     private BigDecimal price;

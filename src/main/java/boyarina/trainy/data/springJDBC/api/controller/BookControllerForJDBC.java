@@ -1,22 +1,23 @@
-package boyarina.trainy.mvc.second.api.controller;
+package boyarina.trainy.data.springJDBC.api.controller;
 
+
+import boyarina.trainy.data.springJDBC.service.BookServiceForJDBC;
 import boyarina.trainy.mvc.second.service.dto.BookRequest;
 import boyarina.trainy.mvc.second.service.dto.BookResponse;
-import boyarina.trainy.mvc.second.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @AllArgsConstructor
-@RequestMapping("/api/book")
-public class BookController {
-    private final BookService bookService;
+public class BookControllerForJDBC {
+    private final BookServiceForJDBC bookService;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<BookResponse>> getAllBooks(Pageable pageable) {
@@ -39,7 +40,7 @@ public class BookController {
     }
 
     @DeleteMapping("/delete/{BOOK_UUID}")
-    public void getBook(@PathVariable("BOOK_UUID") UUID id) {
+    public void deleteBook(@PathVariable("BOOK_UUID") UUID id) {
         bookService.deleteBook(id);
     }
 }

@@ -1,6 +1,6 @@
 package boyarina.trainy.mvc.first.service.converter;
 
-import boyarina.trainy.mvc.first.api.dto.UserResponse;
+import boyarina.trainy.mvc.first.service.dto.UserResponse;
 import boyarina.trainy.mvc.first.entity.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

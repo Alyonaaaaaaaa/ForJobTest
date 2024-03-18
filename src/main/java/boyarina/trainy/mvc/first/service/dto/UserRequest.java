@@ -1,4 +1,4 @@
-package boyarina.trainy.mvc.first.api.dto;
+package boyarina.trainy.mvc.first.service.dto;
 
 import lombok.Data;
 

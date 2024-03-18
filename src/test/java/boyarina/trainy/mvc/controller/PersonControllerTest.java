@@ -2,9 +2,9 @@ package boyarina.trainy.mvc.controller;
 
 import boyarina.exception.NotFoundException;
 import boyarina.trainy.mvc.first.api.controller.UserController;
-import boyarina.trainy.mvc.first.api.dto.ReportResponse;
-import boyarina.trainy.mvc.first.api.dto.UserRequest;
-import boyarina.trainy.mvc.first.api.dto.UserResponse;
+import boyarina.trainy.mvc.first.service.dto.ReportResponse;
+import boyarina.trainy.mvc.first.service.dto.UserRequest;
+import boyarina.trainy.mvc.first.service.dto.UserResponse;
 import boyarina.trainy.mvc.first.entity.Order;
 import boyarina.trainy.mvc.first.entity.User;
 import boyarina.trainy.mvc.first.service.UserService;

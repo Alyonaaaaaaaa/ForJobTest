@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -25,4 +27,8 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+
+    @DateTimeFormat
+    @Column(name = "publication_year")
+    private LocalDate publicationYear;
 }

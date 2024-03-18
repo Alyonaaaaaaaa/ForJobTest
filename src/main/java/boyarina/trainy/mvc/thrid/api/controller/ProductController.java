@@ -1,6 +1,6 @@
 package boyarina.trainy.mvc.thrid.api.controller;
 
-import boyarina.trainy.mvc.thrid.api.dto.ProductRequest;
+import boyarina.trainy.mvc.thrid.service.dto.ProductRequest;
 import boyarina.trainy.mvc.thrid.service.ProductService;
 import boyarina.trainy.mvc.thrid.service.converter.JsonToProductConverter;
 import lombok.AllArgsConstructor;

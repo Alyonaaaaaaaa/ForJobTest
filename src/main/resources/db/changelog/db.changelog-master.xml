@@ -122,7 +122,8 @@
     <!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
     <!--            </column>-->
     <!--            <column name="customer_id" type="uuid">-->
-    <!--                <constraints unique="false" nullable="false" foreignKeyName="invoice_customer_id" references="customer(id)"-->
+    <!--                <constraints unique="false" nullable="false" foreignKeyName="invoice_customer_id"-->
+    <!--                             references="customer(id)"-->
     <!--                             deleteCascade="true"/>-->
     <!--            </column>-->
     <!--            <column name="invoiceDate" type="date">-->
@@ -156,48 +157,83 @@
     <!--        </createTable>-->
     <!--    </changeSet>-->
 
-<!--    <changeSet id="person" author="boyarina">-->
-<!--        <createTable tableName="person">-->
-<!--            <column name="id" type="uuid">-->
-<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="username" type="varchar(255)">-->
-<!--                <constraints unique="false" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="password" type="varchar(255)">-->
-<!--                <constraints unique="false" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="email" type="varchar(255)">-->
-<!--                <constraints unique="false" nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
+    <!--    <changeSet id="person" author="boyarina">-->
+    <!--        <createTable tableName="person">-->
+    <!--            <column name="id" type="uuid">-->
+    <!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+    <!--            </column>-->
+    <!--            <column name="username" type="varchar(255)">-->
+    <!--                <constraints unique="false" nullable="false"/>-->
+    <!--            </column>-->
+    <!--            <column name="password" type="varchar(255)">-->
+    <!--                <constraints unique="false" nullable="false"/>-->
+    <!--            </column>-->
+    <!--            <column name="email" type="varchar(255)">-->
+    <!--                <constraints unique="false" nullable="false"/>-->
+    <!--            </column>-->
+    <!--        </createTable>-->
+    <!--    </changeSet>-->
 
-<!--    <changeSet id="role" author="boyarina">-->
-<!--        <createTable tableName="role">-->
-<!--            <column name="id" type="uuid">-->
-<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="name" type="varchar(255)">-->
-<!--                <constraints unique="false" nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
+    <!--    <changeSet id="role" author="boyarina">-->
+    <!--        <createTable tableName="role">-->
+    <!--            <column name="id" type="uuid">-->
+    <!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+    <!--            </column>-->
+    <!--            <column name="name" type="varchar(255)">-->
+    <!--                <constraints unique="false" nullable="false"/>-->
+    <!--            </column>-->
+    <!--        </createTable>-->
+    <!--    </changeSet>-->
 
-<!--    <changeSet id="user_role" author="boyarina">-->
-<!--        <createTable tableName="user_role">-->
-<!--            <column name="id" type="uuid">-->
-<!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="role_id" type="UUID">-->
-<!--                <constraints unique="false" nullable="false" foreignKeyName="user_role_id"-->
-<!--                             references="role(id)" deleteCascade="true"/>-->
-<!--            </column>-->
-<!--            <column name="person_id" type="UUID">-->
-<!--                <constraints unique="false" nullable="false" foreignKeyName="role_user_id"-->
-<!--                             references="person(id)" deleteCascade="true"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
+    <!--    <changeSet id="user_role" author="boyarina">-->
+    <!--        <createTable tableName="user_role">-->
+    <!--            <column name="id" type="uuid">-->
+    <!--                <constraints unique="true" nullable="false" primaryKey="true"/>-->
+    <!--            </column>-->
+    <!--            <column name="role_id" type="UUID">-->
+    <!--                <constraints unique="false" nullable="false" foreignKeyName="user_role_id"-->
+    <!--                             references="role(id)" deleteCascade="true"/>-->
+    <!--            </column>-->
+    <!--            <column name="person_id" type="UUID">-->
+    <!--                <constraints unique="false" nullable="false" foreignKeyName="role_user_id"-->
+    <!--                             references="person(id)" deleteCascade="true"/>-->
+    <!--            </column>-->
+    <!--        </createTable>-->
+    <!--    </changeSet>-->
+
+    <changeSet id="department" author="boyarina">
+        <createTable tableName="department">
+            <column name="id" type="uuid">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="employee" author="boyarina">
+        <createTable tableName="employee">
+            <column name="id" type="uuid">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="firstName" type="varchar(255)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="lastName" type="varchar(255)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="position" type="varchar(255)">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="salary" type="money">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="department_id" type="UUID">
+                <constraints unique="false" nullable="false" foreignKeyName="employee_department_id"
+                             references="department(id)" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-package boyarina.trainy.mvc.second.api.dto;
+package boyarina.trainy.mvc.second.service.dto;
 
 import boyarina.trainy.mvc.second.entity.Author;
 import lombok.AllArgsConstructor;

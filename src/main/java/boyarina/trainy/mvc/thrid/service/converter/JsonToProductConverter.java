@@ -1,6 +1,6 @@
 package boyarina.trainy.mvc.thrid.service.converter;
 
-import boyarina.trainy.mvc.thrid.api.dto.ProductRequest;
+import boyarina.trainy.mvc.thrid.service.dto.ProductRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.convert.converter.Converter;

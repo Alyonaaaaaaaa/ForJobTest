@@ -1,4 +1,4 @@
-package boyarina.trainy.mvc.thrid.api.dto;
+package boyarina.trainy.mvc.thrid.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
