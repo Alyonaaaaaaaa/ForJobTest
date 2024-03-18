@@ -21,7 +21,7 @@ public class BookControllerForJDBC {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<BookResponse>> getAllBooks(Pageable pageable) {
-        return ResponseEntity.ok(bookService.getAllBooks(pageable));
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
 
     @PostMapping("/getOne")
@@ -30,8 +30,8 @@ public class BookControllerForJDBC {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BookResponse> createBook(@RequestBody @Validated BookRequest request) {
-        return ResponseEntity.ok(bookService.createBook(request.getTitle(), request.getAuthorName()));
+    public void createBook(@RequestBody @Validated BookRequest request) {
+        bookService.createBook(request.getTitle(), request.getAuthorName());
     }
 
     @PutMapping("/updateTitle/{BOOK_UUID}")
